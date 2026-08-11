@@ -19,15 +19,25 @@ The source data are open pharmacovigilance data from VigiMed, the Brazilian spon
 
 Place the following files in the input directory specified in the code:
 
-- `VigiMed_Notificacoes.csv` — report-level information; available for download from the Brazilian Open Data Portal: https://dados.gov.br/home.
-- `VigiMed_Medicamentos.csv` — medicine-level information; available for download from the Brazilian Open Data Portal: https://dados.gov.br/home.
-- `VigiMed_Reacoes.csv` — adverse reaction information; available for download from the Brazilian Open Data Portal: https://dados.gov.br/home.
 - `harmonizacao_2.csv` — active-substance harmonisation table provided in this repository;
 - `Mapeamento_aware.xlsx` — lookup table mapping each harmonised antibiotic name to its WHO AWaRe class, provided in this repository and used by the AWaRe analysis; and
 - `SMQ Medication Error.xlsx` — MedDRA Standardised MedDRA Query (SMQ) terms used to identify medication errors (Brazilian Portuguese, version 28.1). The file is available from MedDRA after logging in at https://tools.meddra.org/wbb/. Users without access may request it by contacting MedDRA at https://www.meddra.org/contact.
 
 The MedDRA/SMQ file is not redistributed in this repository because it is subject to licensing restrictions. Users must obtain an appropriately licensed copy and provide it locally before running the relevant stages of the pipeline.
 
+Release contains the VigiMed source data extracts used in the study. The files were downloaded from the Brazilian Open Data Portal in November 2025 and are provided to support the exact reproduction of the data-processing and analytical procedures.
+
+Included files:
+
+- VigiMed_Notificacoes.csv
+- VigiMed_Medicamentos.csv
+- VigiMed_Reacoes.csv
+
+Download the three files and place them in the same directory as the analysis notebooks before running the pipeline.
+
+The current versions of the VigiMed datasets remain available from the Brazilian Open Data Portal. However, they may differ from the archived extracts used in this study.
+
+The MedDRA/SMQ file is not included because it is subject to MedDRA licensing conditions.
 ## Computing environment
 
 The analysis was developed using Python 3.13.5. Package versions required to reproduce the environment are listed in `requirements.txt` (pandas, numpy, python-docx, openpyxl, statsmodels, matplotlib, and seaborn).
