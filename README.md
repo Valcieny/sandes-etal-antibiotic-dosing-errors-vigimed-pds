@@ -21,7 +21,7 @@ Place the following files in the input directory specified in the code:
 
 - `harmonizacao_2.csv` — active-substance harmonisation table provided in this repository;
 - `Mapeamento_aware.xlsx` — lookup table mapping each harmonised antibiotic name to its WHO AWaRe class, provided in this repository and used by the AWaRe analysis; and
-- `SMQ Medication Error.xlsx` — MedDRA Standardised MedDRA Query (SMQ) terms used to identify medication errors (Brazilian Portuguese, version 28.1). The file is available from MedDRA after logging in at https://tools.meddra.org/wbb/. Users without access may request it by contacting MedDRA at https://www.meddra.org/contact.
+- `Pts smq erro de medicação.xlsx` — MedDRA Standardised MedDRA Query (SMQ) terms used to identify medication errors (Brazilian Portuguese, version 28.1). The file is available from MedDRA after logging in at https://tools.meddra.org/wbb/. Users without access may request it by contacting MedDRA at https://www.meddra.org/contact.
 
 The MedDRA/SMQ file is not redistributed in this repository because it is subject to licensing restrictions. Users must obtain an appropriately licensed copy and provide it locally before running the relevant stages of the pipeline.
 
