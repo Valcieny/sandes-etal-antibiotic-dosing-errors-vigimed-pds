@@ -146,8 +146,8 @@ Results may depend on the versions of the VigiMed extracts, MedDRA/SMQ terminolo
 
 If you use this repository, please cite the associated article and repository:
 
-> [ARTICLE CITATION TO BE ADDED]
->
+> Reported dosing-related medication errors involving systemic antibiotics in the Brazilian pharmacovigilance database (2018–2025): distribution across the WHO AWaRe classification
+>Pharmacology and Drug Safety, 2026.
 > DOI: [DOI TO BE ADDED]
 
 
