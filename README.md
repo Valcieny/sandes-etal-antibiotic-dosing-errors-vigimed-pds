@@ -11,7 +11,8 @@ The code is organised in three notebooks that must be run in order:
 2. `Analise_1_so1grupo_Sandes_et_al.ipynb` — medication-error group comparison.
 3. `Analise_2_aware_Sandes_et_al.ipynb` — WHO AWaRe classification and dosing-related errors.
 
-The two analysis notebooks read files produced by the pipeline and therefore cannot be run before it.
+Analysis 1 reads the intermediate antibiotic dataset produced by the pipeline and exports the medication-error dataset required by Analysis 2.
+
 
 The source data are open pharmacovigilance data from VigiMed, the Brazilian spontaneous reporting system maintained by the Brazilian Health Regulatory Agency (Anvisa).
 
@@ -28,7 +29,7 @@ The MedDRA/SMQ file is not redistributed in this repository because it is subjec
 The VigiMed source data extracts used in this study are archived separately on Zenodo at https://doi.org/10.5281/zenodo.21895098. They cover data through November 2025 and were downloaded from the Brazilian Open Data Portal on 3 December 2025. These archived extracts are provided to support the exact reproduction of the data-processing and analytical procedures.
 
 
-Files available in the data deposit::
+Files available in the data deposit:
 
 - VigiMed_Notificacoes.csv
 - VigiMed_Medicamentos.csv
@@ -38,7 +39,6 @@ Download the three files and place them in the same directory as the analysis no
 
 The current versions of the VigiMed datasets remain available from the Brazilian Open Data Portal. However, they may differ from the archived extracts used in this study.
 
-The MedDRA/SMQ file is not included because it is subject to MedDRA licensing conditions.
 ## Computing environment
 
 The analysis was developed using Python 3.13.5. Package versions required to reproduce the environment are listed in `requirements.txt` (pandas, numpy, python-docx, openpyxl, statsmodels, matplotlib, and seaborn).
@@ -84,7 +84,8 @@ The processing stages should be run in the order implemented in the analysis cod
 13. Application of the Medication Error SMQ.
 14. Subselection of dose-error reports.
 
-The order is important because later selections rely on variables and linked records produced during earlier stages. Running the pipeline generates the analytical datasets used by the analysis notebooks, including `filtered_j01_suspeito_nao_adm_y_analise_1225.csv` and `arquivo_filtrado_smq_erro_de_medicacao_y.csv`.
+The pipeline generates `filtered_j01_suspeito_nao_adm_y_analise_1225.csv` before SMQ filtering. This file is used by Analysis 1, which generates `medication_error_pairs_analysis1.csv` for Analysis 2. Run each notebook from top to bottom in a fresh kernel.
+
 
 ## Analysis notebooks
 
@@ -96,19 +97,20 @@ Input: `filtered_j01_suspeito_nao_adm_y_analise_1225.csv` (produced by the pipel
 
 This notebook classifies J01 medication–event pairs into analytic groups (no medication error; medication error without a dosing component; dosing-related error) and compares any medication error versus no error. Crude and adjusted prevalence ratios (PR) are estimated using Poisson regression with robust variance clustered by notification.
 
-Outputs: a descriptive table and the prevalence-ratio table (PR with 95% confidence intervals) as Word documents, and forest-plot figures (PNG/PDF).
+Outputs: a descriptive table and the prevalence-ratio table (PR with 95% confidence intervals) as Word documents, and forest-plot figures (PNG/PDF). The notebook also exports `medication_error_pairs_analysis1.csv` for Analysis 2.
+
 
 ### `Analise_2_aware_Sandes_et_al.ipynb` — WHO AWaRe classification and dosing-related errors
 
-Inputs: `arquivo_filtrado_smq_erro_de_medicacao_y.csv` (produced by the pipeline) and `Mapeamento_aware.xlsx` (provided in this repository).
+Inputs: `medication_error_pairs_analysis1.csv` (produced by Analysis 1) and `Mapeamento_aware.xlsx` (provided in this repository).
 
 This notebook classifies antibiotics according to the WHO AWaRe framework and models the proportion of dosing-related errors among medication-error drug–event pairs by AWaRe class, adjusted for age group, sex, and reporting source (Poisson regression with robust variance clustered by notification, reference AWaRe class = Access). It includes two sensitivity analyses: one restricted to drug–event pairs in which the antibiotic was reported as a suspect medication, and one additionally adjusted for calendar year.
 
-Outputs: the AWaRe prevalence-ratio table and the sensitivity and temporal tables as Word documents; Figure 3 (a heatmap of the proportion of dosing-related errors by antibiotic and age group, with the stratum denominator shown in each cell) and a supplementary figure of drug–event pairs by year (PNG/PDF).
+Outputs: the AWaRe prevalence-ratio table and the sensitivity and temporal tables as Word documents; Figure 3 (a heatmap of the proportion of dosing-related errors by antibiotic and age group, with the stratum denominator shown in each cell).
 
 ## Running the analysis
 
-1. Download the Medication Errors SMQ Excel file from MedDRA (Brazilian Portuguese, version 28.1) using appropriately licensed access. Rename it to `Pts smq erro de medicação.xlsx` and place it in the same directory as the pipeline notebook, without changing its contents or column headings.
+1. Download the Medication Errors SMQ Excel file from MedDRA (Brazilian Portuguese, version 28.1). Rename it to `Pts smq erro de medicação.xlsx` and place it in the same directory as the pipeline notebook, without changing its contents or column headings.
 2. Add all expected input files to the input location configured in the code.
 3. Create the Python environment and install `requirements.txt` as described above.
 4. Run the pipeline notebook from data cleaning through dose-error subselection; this generates the intermediate and analytical datasets, including the two files consumed by the analysis notebooks.
@@ -127,7 +129,7 @@ The pipeline produces the principal analytical datasets used in the article, inc
 - reports matching the Medication Error SMQ; and
 - the final dose-error subset used in the study analysis.
 
-The analysis notebooks produce the tables and figures reported in the article, including the medication-error and AWaRe prevalence-ratio tables (Word), the sensitivity and temporal tables (Word), the forest-plot figures, the AWaRe heatmap (Figure 3), and the supplementary by-year figure (PNG/PDF).
+The analysis notebooks produce the tables and figures reported in the article, including the medication-error and AWaRe prevalence-ratio tables (Word), the sensitivity and temporal tables (Word), the forest-plot figures, and the AWaRe heatmap (Figure 3).
 
 Output filenames and locations follow the settings defined in the analysis code. Intermediate files are retained where required to audit the linkage, deduplication, and harmonisation steps.
 
@@ -147,7 +149,7 @@ Results may depend on the versions of the VigiMed extracts, MedDRA/SMQ terminolo
 If you use this repository, please cite the associated article and repository:
 
 > Reported dosing-related medication errors involving systemic antibiotics in the Brazilian pharmacovigilance database (2018–2025): distribution across the WHO AWaRe classification
->Pharmacology and Drug Safety, 2026.
+>Pharmacoepidemiology and Drug Safety, 2026.
 > DOI: [DOI TO BE ADDED]
 
 
