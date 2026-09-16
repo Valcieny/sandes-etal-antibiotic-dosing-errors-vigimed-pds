@@ -25,9 +25,10 @@ Place the following files in the input directory specified in the code:
 
 The MedDRA/SMQ file is not redistributed in this repository because it is subject to licensing restrictions. Users must obtain an appropriately licensed copy and provide it locally before running the relevant stages of the pipeline.
 
-Release contains the VigiMed source data extracts used in the study. The files were downloaded from the Brazilian Open Data Portal in November 2025 and are provided to support the exact reproduction of the data-processing and analytical procedures.
+The VigiMed source data extracts used in this study are archived separately on Zenodo at https://doi.org/10.5281/zenodo.21895098. They cover data through November 2025 and were downloaded from the Brazilian Open Data Portal on 3 December 2025. These archived extracts are provided to support the exact reproduction of the data-processing and analytical procedures.
 
-Included files:
+
+Files available in the data deposit::
 
 - VigiMed_Notificacoes.csv
 - VigiMed_Medicamentos.csv
