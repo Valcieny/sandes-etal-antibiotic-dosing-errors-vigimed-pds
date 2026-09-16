@@ -108,7 +108,7 @@ Outputs: the AWaRe prevalence-ratio table and the sensitivity and temporal table
 
 ## Running the analysis
 
-1. Obtain a licensed copy of the required MedDRA/SMQ file.
+1. Download the Medication Errors SMQ Excel file from MedDRA (Brazilian Portuguese, version 28.1) using appropriately licensed access. Rename it to `Pts smq erro de medicação.xlsx` and place it in the same directory as the pipeline notebook, without changing its contents or column headings.
 2. Add all expected input files to the input location configured in the code.
 3. Create the Python environment and install `requirements.txt` as described above.
 4. Run the pipeline notebook from data cleaning through dose-error subselection; this generates the intermediate and analytical datasets, including the two files consumed by the analysis notebooks.
